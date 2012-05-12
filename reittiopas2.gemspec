@@ -15,6 +15,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Reittiopas2::VERSION
 
-  gem.add_dependency "oj"
+  gem.add_dependency "json"
   gem.add_development_dependency "rspec"
+  gem.add_development_dependency "webmock"
 end

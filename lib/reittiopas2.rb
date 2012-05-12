@@ -1,12 +1,14 @@
+require "net/http"
+require "json"
+
 require "reittiopas2/version"
 
-class Reittiopas2
-  def initialize(username, password)
-    @username = username
-    @password = password
-  end
+require "reittiopas2/connection"
 
-  def base_api_url
-    "http://api.reittiopas.fi/hsl/prod/?user=#{@username}&pass=#{@password}"
+class Reittiopas2
+
+  def initialize(username, password)
+    @connection = Reittiopas2::Connection.new(username, password)
   end
 end
+
