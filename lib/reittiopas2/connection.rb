@@ -51,15 +51,11 @@ class Connection
   private
 
 
-  def create_query_string(query)
-    retval = ""
-    query.each do |key, val|
-      retval << key << "=" << val << "&"
-    end
-
-    retval[0..-2] # Remove last '&'
-  end
-
+  # Reittiopas API wants arrays as values seperated with pipes. This method
+  # checks query for arrays and converts them to API friendly versions.
+  #
+  # @param [Hash] query the query to be checked for arrays to convert.
+  # @return [Hash] hash where arrays are converted to pipe presentation.
   def fix_arrays(query)
     retval = {}
     query.each do |key, val|
