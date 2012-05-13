@@ -1,5 +1,10 @@
 class Reittiopas2
 
+# Handles connectting to Reittiopas API and transforms query hashes into form
+# that Reittiopas API can digest them. This class is also responsible for
+# parsing response into Ruby readable form.
+#
+# @api private
 class Connection
 
   def initialize(username, password)
@@ -7,14 +12,23 @@ class Connection
     @base_query = {"user" => username, "pass" => password}
   end
 
-
+ 
+  # Forms proper query from credentials + given query and sends it to API
+  # endpoint. Also parses response into Ruby readable form.
+  #
+  # In case of errors, be those from API endpoint or from internal processes,
+  # return value will be hash with one field 'error' which contains error
+  # message.
+  #
+  # In fatal error situations Exception will be thrown, only exception for this
+  # rule is JSON::ParserException which is caught and returned as value of
+  # 'error' field.
+  #
+  # @param [Hash] query the query which is to be sent to API endpoint
+  # @return [Hash] the whatever data was requested from API, or Hash containing
+  #   key 'error' containing error message.
   def perform_query(query={})
     query = fix_arrays(query)
-    # uri = URI(@base_url)
-    # uri.query = URI.encode_www_form @base_query.merge(query)
-    # uri.query = create_query_string @base_query.merge(query)
-    # uri_str = @base_url << "?" << create_query_string(@base_query.merge(query))
-    # uri = URI.parse(uri_str)
     uri = Addressable::URI.parse(@base_url)
     uri.query_values = @base_query.merge(query)
 
