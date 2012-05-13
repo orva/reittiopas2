@@ -20,6 +20,9 @@ describe Reittiopas2::Geocoding do
 
 
     it "should perform request to API geocode endpoint." do
+      stub_request(:get, @base_url).
+        with(:query => @query)
+
       @reitti.geocode(@city)
 
       a_request(:get, @base_url).
@@ -34,9 +37,7 @@ describe Reittiopas2::Geocoding do
         'disable_error_correction' => 0,
         'disable_unique_stop_names' => 0
       }
-      opts = valid_opts.merge('not_valid_key' => 'or value')
-      @reitti.geocode(@city, opts)
-
+      
       opts_query_form = {
         "cities" => "helsinki|espoo",
         "loc_types" => "stop|address",
@@ -44,7 +45,15 @@ describe Reittiopas2::Geocoding do
         "disable_unique_stop_names" => 0
       }
 
+
       query = @query.merge(opts_query_form)
+      opts = valid_opts.merge('not_valid_key' => 'or value')
+
+      stub_request(:get, @base_url).
+        with(:query => query)
+
+      @reitti.geocode(@city, opts)
+
       a_request(:get, @base_url).
         with(:query => query).should have_been_made.once
     end
@@ -73,6 +82,9 @@ describe Reittiopas2::Geocoding do
 
 
     it "should perform request to API reverse_geocode endpoint." do
+      stub_request(:get, @base_url).
+        with(:query => @query)
+
       @reitti.reverse_geocode(@coords)
 
       a_request(:get, @base_url).
@@ -87,8 +99,6 @@ describe Reittiopas2::Geocoding do
         'radius' => 1000,
         'result_contains' => 'stop'
       }
-      opts = valid_opts.merge('not_valid_key' => 'or value')
-      @reitti.reverse_geocode(@coords, opts)
 
       opts_query_form = {
         "coordinate" => "2552335,6673660",
@@ -97,7 +107,15 @@ describe Reittiopas2::Geocoding do
         "result_contains" => "stop"
       }
 
+
+      opts = valid_opts.merge('not_valid_key' => 'or value')
       query = @query.merge(opts_query_form)
+
+      stub_request(:get, @base_url).
+        with(:query => query)
+
+      @reitti.reverse_geocode(@coords, opts)
+
       a_request(:get, @base_url).
         with(:query => query).should have_been_made.once
     end

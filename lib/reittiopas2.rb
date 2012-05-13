@@ -1,4 +1,5 @@
 require "net/http"
+require "addressable/uri"
 require "json"
 
 require "reittiopas2/version"

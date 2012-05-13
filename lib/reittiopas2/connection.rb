@@ -10,8 +10,13 @@ class Connection
 
   def perform_query(query={})
     query = fix_arrays(query)
-    uri = URI(@base_url)
-    uri.query = URI.encode_www_form @base_query.merge(query)
+    # uri = URI(@base_url)
+    # uri.query = URI.encode_www_form @base_query.merge(query)
+    # uri.query = create_query_string @base_query.merge(query)
+    # uri_str = @base_url << "?" << create_query_string(@base_query.merge(query))
+    # uri = URI.parse(uri_str)
+    uri = Addressable::URI.parse(@base_url)
+    uri.query_values = @base_query.merge(query)
 
     res = Net::HTTP.get_response(uri)
 
@@ -26,13 +31,20 @@ class Connection
     end
   rescue JSON::ParserError => ex
     {'error' => ex.class}
-  rescue Exception => ex
-    {'error' => ex.class}
   end
 
 
   private
 
+
+  def create_query_string(query)
+    retval = ""
+    query.each do |key, val|
+      retval << key << "=" << val << "&"
+    end
+
+    retval[0..-2] # Remove last '&'
+  end
 
   def fix_arrays(query)
     retval = {}
