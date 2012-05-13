@@ -1,8 +1,11 @@
 require "rubygems"
 require "bundler/setup"
-require "reittiopas2"
-
 require "webmock/rspec"
+
+require "simplecov"
+SimpleCov.start
+
+require "reittiopas2"
 
 
 RSpec.configure do |config|

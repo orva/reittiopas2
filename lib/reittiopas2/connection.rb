@@ -38,10 +38,10 @@ class Connection
       # In case of errors, code 500 is returned and there is explanation in
       # response body as HTML.
       {'error' => res.body}
-    elsif res.body
-      JSON.load res.body.to_s
-    else
+    elsif res.body.empty? or res.body.nil?
       {'error' => "Response body was empty!"}
+    else
+      JSON.load res.body.to_s
     end
   rescue JSON::ParserError => ex
     {'error' => ex.class}

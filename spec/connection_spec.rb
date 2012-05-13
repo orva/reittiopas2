@@ -72,5 +72,13 @@ describe Reittiopas2::Connection do
       ret['error'].should_not be_nil
     end
 
+    it "should have error field in case of empty response body" do
+      stub_request(:get, @base_url).
+        with(:query => @query).
+        to_return(:body => '')
+
+      ret = @conn.perform_query
+      ret.should == {'error' => 'Response body was empty!'}
+    end
   end
 end

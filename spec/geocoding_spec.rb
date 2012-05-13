@@ -68,6 +68,7 @@ describe Reittiopas2::Geocoding do
         to_return(:body => json)
 
       locs = @reitti.geocode("Helsinki", opts)
+      locs.should be_kind_of(Array)
       locs[0].should be_kind_of(Hash)
     end
   end
