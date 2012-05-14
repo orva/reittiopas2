@@ -53,5 +53,31 @@ describe Reittiopas2::Routing do
       ret = @reitti.route(from_hash, @to)
       ret['error'].should == 'ArgumentError: from.class != to.class'
     end
+
+    # This test works because we are not checking values, only keys
+    it "should reject keys that are not valid query parameters" do
+      keys = ['via', 'date', 'time', 'timetype', 'via_time', 'zone',
+        'transport_types', 'optimize', 'change_margin', 'change_cost', 
+        'wait_cost', 'walk_cost', 'walk_speed', 'detail', 'show'] 
+      mode_costs = ['mode_cost_1', 'mode_cost_2', 'mode_cost_3', 'mode_cost_4',
+        'mode_cost_5', 'mode_cost_6', 'mode_cost_7', 'mode_cost_7', 
+        'mode_cost_8', 'mode_cost_12', 'mode_cost_21', 'mode_cost_22',
+        'mode_cost_23', 'mode_cost_24', 'mode_cost_25', 'mode_cost_36', 
+        'mode_cost_39']
+
+      opts = {}
+      keys.each { |key| opts[key] = "_" }
+      mode_costs.each { |key| opts[key] = "_" }
+
+      query = @query.merge(opts)
+      stub_request(:get, @base_url).
+        with(:query => query)
+
+      invalid = query.merge('not valid' => 'at all')
+      @reitti.route(@from, @to, invalid)
+
+      a_request(:get, @base_url).
+        with(:query => query).should have_been_made.once
+    end
   end
 end
