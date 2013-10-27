@@ -15,11 +15,11 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Reittiopas2::VERSION
 
-  gem.add_dependency "json"
-  gem.add_dependency "addressable"
+  gem.add_dependency "json",        "~> 1.8"
+  gem.add_dependency "addressable", "~> 2.3"
 
-  gem.add_development_dependency "rspec"
-  gem.add_development_dependency "webmock"
-  gem.add_development_dependency "guard-rspec"
-  gem.add_development_dependency "simplecov"
+  gem.add_development_dependency "rspec",       "~> 2.14"
+  gem.add_development_dependency "webmock",     "~> 1.15"
+  gem.add_development_dependency "guard-rspec", "~> 4.0"
+  gem.add_development_dependency "simplecov",   "~> 0.7"
 end
