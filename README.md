@@ -1,6 +1,9 @@
 # Reittiopas2
 
-TODO: Write a gem description
+Barebones gem wrapping
+[reittiopas v2 API](http://developer.reittiopas.fi/pages/fi/reittiopas-api.php),
+providing simple route searching and geocoding.
+
 
 ## Installation
 
@@ -18,7 +21,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Sadly, you have to dive into docstrings for documentation.
 
 ## Contributing
 

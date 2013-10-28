@@ -2,7 +2,7 @@
 require File.expand_path('../lib/reittiopas2/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Iivari Äikäs"]
+  gem.authors       = ["Iivari Äikäs", "Jussi Virtanen"]
   gem.email         = ["iivari.aikas@gmail.com"]
   gem.description   = %q{Reittiopas version 2 API library.}
   gem.summary       = %q{Gem providing easy access to reittiopas version 2 API.}
