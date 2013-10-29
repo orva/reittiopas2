@@ -1,6 +1,7 @@
 require "reittiopas2/connection"
 require "reittiopas2/geocoding"
 require "reittiopas2/routing"
+require "reittiopas2/util"
 require "reittiopas2/version"
 
 class Reittiopas2
