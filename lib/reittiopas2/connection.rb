@@ -1,3 +1,7 @@
+require 'addressable/uri'
+require 'json'
+require 'net/http'
+
 class Reittiopas2
 
 # Handles connectting to Reittiopas API and transforms query hashes into form
