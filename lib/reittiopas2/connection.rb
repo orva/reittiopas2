@@ -64,24 +64,12 @@ class Connection
     retval = {}
     query.each do |key, val|
       if val.is_a? Array
-        retval[key] = array_to_query_form(val)
+        retval[key] = val.join('|')
       else
         retval[key] = val
       end
     end
     retval
-  end
-
-
-  def array_to_query_form(arr)
-    raise(ArgumentError, "arr is not Array") unless arr.is_a? Array
-
-    retval = ""
-    arr.each do |val|
-      retval << val << "|"
-    end
-
-    retval[0..-2] # Remove last pipe
   end
 end
 
