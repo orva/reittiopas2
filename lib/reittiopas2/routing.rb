@@ -1,3 +1,4 @@
+require 'reittiopas2/util'
 
 class Reittiopas2
 
@@ -98,7 +99,7 @@ module Routing
       return {'error' => 'ArgumentError: locations were not acceptable types'}
     end
 
-    clean_opts = route_remove_invalid_keys(opts)
+    clean_opts = Util.select_keys(opts, KEYS + MODE_COSTS)
     @connection.perform_query(clean_opts.merge(query))
   end
 
@@ -122,24 +123,16 @@ module Routing
     }
   end
 
-  def route_remove_invalid_keys(opts)
-    keys = ['via', 'date', 'time', 'timetype', 'via_time', 'zone',
-      'transport_types', 'optimize', 'change_margin', 'change_cost', 
-      'wait_cost', 'walk_cost', 'walk_speed', 'detail', 'show'] 
-    mode_costs = ['mode_cost_1', 'mode_cost_2', 'mode_cost_3', 'mode_cost_4',
+  KEYS = ['via', 'date', 'time', 'timetype', 'via_time', 'zone',
+    'transport_types', 'optimize', 'change_margin', 'change_cost',
+    'wait_cost', 'walk_cost', 'walk_speed', 'detail', 'show']
+
+  MODE_COSTS = ['mode_cost_1', 'mode_cost_2', 'mode_cost_3', 'mode_cost_4',
       'mode_cost_5', 'mode_cost_6', 'mode_cost_7', 'mode_cost_7', 
       'mode_cost_8', 'mode_cost_12', 'mode_cost_21', 'mode_cost_22',
       'mode_cost_23', 'mode_cost_24', 'mode_cost_25', 'mode_cost_36', 
       'mode_cost_39']
 
-    whitelist = []  
-    whitelist.concat keys
-    whitelist.concat mode_costs
-
-    opts.select do |key, val|
-      whitelist.include? key
-    end
-  end
 end
 
 end

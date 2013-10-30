@@ -1,3 +1,5 @@
+require "reittiopas2/util"
+
 class Reittiopas2
 
 # Module containing public API to perform geocoding and reverse geocoding
@@ -68,7 +70,7 @@ module Geocoding
   # @return [Array<Hash>] array containing location hashes matched given query.
   # @see #reverse_geocode
   def geocode(place_name, opts={})
-    clean = geocode_remove_invalid_keys(opts)
+    clean = Util.select_keys(opts, GEOCODE_KEYS)
     query = {'request' =>'geocode', 'key' => place_name}.merge(clean)
     @connection.perform_query(query)
   end
@@ -92,31 +94,17 @@ module Geocoding
   #   coordinates.
   # @see #geocode
   def reverse_geocode(coords, opts={})
-    clean = reverse_geocode_remove_invalid_keys(opts)
+    clean = Util.select_keys(opts, REVERSE_GEOCODE_KEYS)
     query = {'request' => 'reverse_geocode', 'coordinate' => coords}.merge(clean)
     @connection.perform_query(query)
   end
 
 
-  private 
+  GEOCODE_KEYS = ['key', 'cities', 'loc_types', 'disable_error_correction',
+    'disable_unique_stop_names']
 
+  REVERSE_GEOCODE_KEYS = ['coordinate', 'limit', 'radius', 'result_contains']
 
-  def geocode_remove_invalid_keys(query)
-    whitelist = [ 'key', 'cities', 'loc_types', 'disable_error_correction', 
-      'disable_unique_stop_names' ]
-
-    query.select do |key, val|
-      whitelist.include? key
-    end
-  end
-
-  def reverse_geocode_remove_invalid_keys(query)
-    whitelist = [ 'coordinate', 'limit', 'radius', 'result_contains' ]
-
-    query.select do |key, val|
-      whitelist.include? key
-    end
-  end
 end
 
 
