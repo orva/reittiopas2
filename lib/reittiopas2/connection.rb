@@ -61,15 +61,14 @@ class Connection
   # @param [Hash] query the query to be checked for arrays to convert.
   # @return [Hash] hash where arrays are converted to pipe presentation.
   def fix_arrays(query)
-    retval = {}
-    query.each do |key, val|
+    res = query.map do |key, val|
       if val.is_a? Array
-        retval[key] = val.join('|')
+        [key, val.join('|')]
       else
-        retval[key] = val
+        [key, val]
       end
     end
-    retval
+    Hash[res]
   end
 end
 
