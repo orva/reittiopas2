@@ -7,6 +7,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{Reittiopas version 2 API library.}
   gem.summary       = %q{Gem providing easy access to reittiopas version 2 API.}
   gem.homepage      = "https://github.com/orva/reittiopas2"
+  gem.license       = "MIT"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
