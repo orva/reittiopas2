@@ -1,3 +1,5 @@
+require 'reittiopas2/util'
+
 require 'addressable/uri'
 require 'json'
 require 'net/http'
@@ -32,7 +34,7 @@ class Connection
   # @return [Hash] the whatever data was requested from API, or Hash containing
   #   key 'error' containing error message.
   def perform_query(query={})
-    query = fix_arrays(query)
+    query = Util.convert_array_values(query)
     uri = Addressable::URI.parse(@base_url)
     uri.query_values = @base_query.merge(query)
 
@@ -51,38 +53,6 @@ class Connection
     {'error' => ex.class}
   end
 
-
-  private
-
-
-  # Reittiopas API wants arrays as values seperated with pipes. This method
-  # checks query for arrays and converts them to API friendly versions.
-  #
-  # @param [Hash] query the query to be checked for arrays to convert.
-  # @return [Hash] hash where arrays are converted to pipe presentation.
-  def fix_arrays(query)
-    retval = {}
-    query.each do |key, val|
-      if val.is_a? Array
-        retval[key] = array_to_query_form(val)
-      else
-        retval[key] = val
-      end
-    end
-    retval
-  end
-
-
-  def array_to_query_form(arr)
-    raise(ArgumentError, "arr is not Array") unless arr.is_a? Array
-
-    retval = ""
-    arr.each do |val|
-      retval << val << "|"
-    end
-
-    retval[0..-2] # Remove last pipe
-  end
 end
 
 end
