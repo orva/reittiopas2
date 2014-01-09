@@ -12,7 +12,6 @@ Gem::Specification.new do |gem|
   gem.files         = `git ls-files`.split($\)
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "reittiopas2"
-  gem.require_paths = ["lib"]
   gem.version       = Reittiopas2::VERSION
 
   gem.add_dependency "json",        "~> 1.8"
