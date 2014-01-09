@@ -3,7 +3,9 @@ require "bundler/setup"
 require "webmock/rspec"
 
 require "simplecov"
-SimpleCov.start
+SimpleCov.start do
+  add_filter "/vendor/"
+end
 
 require "reittiopas2"
 
