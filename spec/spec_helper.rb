@@ -1,13 +1,13 @@
-require "rubygems"
-require "bundler/setup"
-require "webmock/rspec"
+require 'rubygems'
+require 'bundler/setup'
+require 'webmock/rspec'
 
-require "simplecov"
+require 'simplecov'
 SimpleCov.start do
   add_filter "/vendor/"
 end
 
-require "reittiopas2"
+require 'reittiopas2'
 
 
 RSpec.configure do |config|
