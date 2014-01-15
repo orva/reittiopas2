@@ -1,32 +1,19 @@
-# Reittiopas2
+# Reittiopas 2
 
-Barebones gem wrapping
-[reittiopas v2 API](http://developer.reittiopas.fi/pages/fi/reittiopas-api.php),
-providing simple route searching and geocoding.
+Reittiopas 2 is a simple Ruby library for accessing the [Reittiopas API][API].
+
+  [API]: http://developer.reittiopas.fi/pages/en/http-get-interface-version-2.php
 
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Install using [Bundler][]:
 
-    gem 'reittiopas2'
+    gem 'reittiopas2', '~> 0.0.3'
 
-And then execute:
+  [Bundler]: http://bundler.io/
 
-    $ bundle
 
-Or install it yourself as:
+## License
 
-    $ gem install reittiopas2
-
-## Usage
-
-Sadly, you have to dive into docstrings for documentation.
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+Reittiopas 2 is released under the MIT License. See `LICENSE` for details.
