@@ -10,8 +10,6 @@ describe Reittiopas2::Connection do
     @query = {"user" => @user, "pass" => @pwd}
   end
 
-
-
   describe "query forming" do
     it "should put pipes into arrays" do
       q = @query.merge({ "array" => ["one", "two", "three"] })
@@ -24,7 +22,6 @@ describe Reittiopas2::Connection do
       a_request(:get, @base_url).with(:query => expected_q).should have_been_made
     end
 
-
     it "should form query only with credentials in case no query given." do
       stub_request(:get, @base_url).
         with(:query => @query)
@@ -33,7 +30,6 @@ describe Reittiopas2::Connection do
       a_request(:get, @base_url).with(:query => @query).should have_been_made
     end
   end
-
 
   describe "perform_query return value" do
     it "should be hash filled with data in case of succesful query." do
@@ -48,7 +44,6 @@ describe Reittiopas2::Connection do
       ret.should == {"max" => 5000, "used" => 44}
     end
 
-
     it "should have response body in error field in case of 500 code" do
       body = "Hello! Error!"
 
@@ -59,7 +54,6 @@ describe Reittiopas2::Connection do
       ret = @conn.perform_query
       ret.should == {'error' => body}
     end
-
 
     it "should error field in case of JSON parse error" do
       body = "well this is not valid JSON"

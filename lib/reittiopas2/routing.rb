@@ -103,9 +103,7 @@ module Routing
     @connection.perform_query(clean_opts.merge(query))
   end
 
-
   private
-
 
   def route_query_from_strings(from, to)
     {

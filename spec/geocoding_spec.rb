@@ -11,13 +11,11 @@ describe Reittiopas2::Geocoding do
     @base_url = "http://api.reittiopas.fi/hsl/prod/"
   end
 
-
   describe "geocoding" do
     before :each do
       @city = 'Helsinki'
       @query = @base_query.merge('request' => 'geocode', 'key' => @city)
     end
-
 
     it "should perform request to API geocode endpoint." do
       stub_request(:get, @base_url).
@@ -28,7 +26,6 @@ describe Reittiopas2::Geocoding do
       a_request(:get, @base_url).
         with(:query => @query).should have_been_made.once
     end
-
 
     it "should send only valid keys to API" do
       valid_opts = {
@@ -45,7 +42,6 @@ describe Reittiopas2::Geocoding do
         "disable_unique_stop_names" => 0
       }
 
-
       query = @query.merge(opts_query_form)
       opts = valid_opts.merge('not_valid_key' => 'or value')
 
@@ -57,7 +53,6 @@ describe Reittiopas2::Geocoding do
       a_request(:get, @base_url).
         with(:query => query).should have_been_made.once
     end
-
 
     it "should return hash of location hashes if query is success" do
       opts = {'loc_types' => 'stop'}
@@ -72,7 +67,6 @@ describe Reittiopas2::Geocoding do
       locs[0].should be_kind_of(Hash)
     end
   end
-
   
   describe "reverse geocoding" do
     before :each do
@@ -80,7 +74,6 @@ describe Reittiopas2::Geocoding do
       @query = @base_query.merge('request' => 'reverse_geocode', 
                                  'coordinate' => @coords)
     end
-
 
     it "should perform request to API reverse_geocode endpoint." do
       stub_request(:get, @base_url).
@@ -91,7 +84,6 @@ describe Reittiopas2::Geocoding do
       a_request(:get, @base_url).
         with(:query => @query).should have_been_made.once
     end
-
 
     it "should send only valid keys to API" do
       valid_opts = {
@@ -108,7 +100,6 @@ describe Reittiopas2::Geocoding do
         "result_contains" => "stop"
       }
 
-
       opts = valid_opts.merge('not_valid_key' => 'or value')
       query = @query.merge(opts_query_form)
 
@@ -120,7 +111,6 @@ describe Reittiopas2::Geocoding do
       a_request(:get, @base_url).
         with(:query => query).should have_been_made.once
     end
-
 
     it "should return hash of location hashes if query is success" do
       json = File.new('spec/data/reverse_geocode.json')
