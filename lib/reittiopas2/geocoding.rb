@@ -1,4 +1,4 @@
-require "reittiopas2/util"
+require 'reittiopas2/util'
 
 class Reittiopas2
 

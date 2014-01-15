@@ -1,4 +1,4 @@
-require "spec_helper"
+require 'spec_helper'
 
 describe Reittiopas2::Routing do
   before :each do
