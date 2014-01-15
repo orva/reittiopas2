@@ -75,7 +75,6 @@ module Geocoding
     @connection.perform_query(query)
   end
 
-
   # Do reverse geocode search to find information about given coordinates.
   #
   # @param [String] coords the coordinate pair "<x_coordinate>,<y_coordinate>"
@@ -98,7 +97,6 @@ module Geocoding
     query = {'request' => 'reverse_geocode', 'coordinate' => coords}.merge(clean)
     @connection.perform_query(query)
   end
-
 
   GEOCODE_KEYS = ['key', 'cities', 'loc_types', 'disable_error_correction',
     'disable_unique_stop_names']

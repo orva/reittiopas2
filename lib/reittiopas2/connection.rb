@@ -17,7 +17,6 @@ class Connection
     @base_url = "http://api.reittiopas.fi/hsl/prod/"
     @base_query = {"user" => username, "pass" => password}
   end
-
  
   # Forms proper query from credentials + given query and sends it to API
   # endpoint. Also parses response into Ruby readable form.
