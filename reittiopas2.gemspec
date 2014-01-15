@@ -10,10 +10,8 @@ Gem::Specification.new do |gem|
   gem.license       = "MIT"
 
   gem.files         = `git ls-files`.split($\)
-  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
-  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
+  gem.test_files    = gem.files.grep(%r{^spec/})
   gem.name          = "reittiopas2"
-  gem.require_paths = ["lib"]
   gem.version       = Reittiopas2::VERSION
 
   gem.add_dependency "json",        "~> 1.8"
