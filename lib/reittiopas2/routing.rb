@@ -100,7 +100,7 @@ module Routing
     end
 
     clean_opts = Util.select_keys(opts, KEYS + MODE_COSTS)
-    @connection.perform_query(clean_opts.merge(query))
+    @client.perform_query(clean_opts.merge(query))
   end
 
   private

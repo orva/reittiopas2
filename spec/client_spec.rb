@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Reittiopas2::Connection do
+describe Reittiopas2::Client do
   before :each do
     @user = "username"
     @pwd = "password"
-    @conn = Reittiopas2::Connection.new @user, @pwd
+    @client = Reittiopas2::Client.new @user, @pwd
 
     @base_url = "http://api.reittiopas.fi/hsl/prod/"
     @query = {"user" => @user, "pass" => @pwd}
@@ -18,7 +18,7 @@ describe Reittiopas2::Connection do
       stub_request(:get, @base_url).
         with(:query => expected_q)
 
-      @conn.perform_query(q)
+      @client.perform_query(q)
       a_request(:get, @base_url).with(:query => expected_q).should have_been_made
     end
 
@@ -26,7 +26,7 @@ describe Reittiopas2::Connection do
       stub_request(:get, @base_url).
         with(:query => @query)
 
-      @conn.perform_query
+      @client.perform_query
       a_request(:get, @base_url).with(:query => @query).should have_been_made
     end
   end
@@ -40,7 +40,7 @@ describe Reittiopas2::Connection do
         with(:query => query).
         to_return(:body => body)
 
-      ret = @conn.perform_query(query)
+      ret = @client.perform_query(query)
       ret.should == {"max" => 5000, "used" => 44}
     end
 
@@ -51,7 +51,7 @@ describe Reittiopas2::Connection do
         with(:query => @query).
         to_return(:status => 500, :body => body)
 
-      ret = @conn.perform_query
+      ret = @client.perform_query
       ret.should == {'error' => body}
     end
 
@@ -62,7 +62,7 @@ describe Reittiopas2::Connection do
         with(:query => @query).
         to_return(:body => body)
 
-      ret = @conn.perform_query
+      ret = @client.perform_query
       ret['error'].should_not be_nil
     end
 
@@ -71,7 +71,7 @@ describe Reittiopas2::Connection do
         with(:query => @query).
         to_return(:body => '')
 
-      ret = @conn.perform_query
+      ret = @client.perform_query
       ret.should == {'error' => 'Response body was empty!'}
     end
   end
