@@ -1,4 +1,4 @@
-require 'reittiopas2/util'
+require 'reittiopas2/utilities'
 
 class Reittiopas2
 
@@ -70,7 +70,7 @@ module Geocoding
   # @return [Array<Hash>] array containing location hashes matched given query.
   # @see #reverse_geocode
   def geocode(place_name, opts={})
-    clean = Util.select_keys(opts, GEOCODE_KEYS)
+    clean = Utilities.select_keys(opts, GEOCODE_KEYS)
     query = {'request' =>'geocode', 'key' => place_name}.merge(clean)
     @connection.perform_query(query)
   end
@@ -93,7 +93,7 @@ module Geocoding
   #   coordinates.
   # @see #geocode
   def reverse_geocode(coords, opts={})
-    clean = Util.select_keys(opts, REVERSE_GEOCODE_KEYS)
+    clean = Utilities.select_keys(opts, REVERSE_GEOCODE_KEYS)
     query = {'request' => 'reverse_geocode', 'coordinate' => coords}.merge(clean)
     @connection.perform_query(query)
   end

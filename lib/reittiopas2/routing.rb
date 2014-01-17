@@ -1,4 +1,4 @@
-require 'reittiopas2/util'
+require 'reittiopas2/utilities'
 
 class Reittiopas2
 
@@ -99,7 +99,7 @@ module Routing
       return {'error' => 'ArgumentError: locations were not acceptable types'}
     end
 
-    clean_opts = Util.select_keys(opts, KEYS + MODE_COSTS)
+    clean_opts = Utilities.select_keys(opts, KEYS + MODE_COSTS)
     @connection.perform_query(clean_opts.merge(query))
   end
 

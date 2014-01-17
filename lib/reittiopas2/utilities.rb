@@ -1,6 +1,6 @@
 class Reittiopas2
 
-module Util
+module Utilities
 
   # Converts array values into string values containing array members joined
   # by pipe ('|') characters.

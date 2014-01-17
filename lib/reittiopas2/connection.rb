@@ -1,4 +1,4 @@
-require 'reittiopas2/util'
+require 'reittiopas2/utilities'
 
 require 'addressable/uri'
 require 'json'
@@ -33,7 +33,7 @@ class Connection
   # @return [Hash] the whatever data was requested from API, or Hash containing
   #   key 'error' containing error message.
   def perform_query(query={})
-    query = Util.convert_array_values(query)
+    query = Utilities.convert_array_values(query)
     uri = Addressable::URI.parse(@base_url)
     uri.query_values = @base_query.merge(query)
 
