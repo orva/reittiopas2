@@ -4,6 +4,7 @@ class Reittiopas2
 
 # Routing module contains all needed functionality to query route information.
 module Routing
+  include Utilities
 
   # Query the route between two coordinate points. In routing it is recommended
   # to use street addresses (their coordinates) as it is difficult for the end
@@ -99,7 +100,7 @@ module Routing
       return {'error' => 'ArgumentError: locations were not acceptable types'}
     end
 
-    clean_opts = Utilities.select_keys(opts, KEYS + MODE_COSTS)
+    clean_opts = select_keys(opts, KEYS + MODE_COSTS)
     @connection.perform_query(clean_opts.merge(query))
   end
 
