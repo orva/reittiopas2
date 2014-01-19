@@ -73,7 +73,7 @@ module Geocoding
   def geocode(place_name, opts={})
     clean = select_keys(opts, GEOCODE_KEYS)
     query = {'request' =>'geocode', 'key' => place_name}.merge(clean)
-    @connection.perform_query(query)
+    @client.perform_query(query)
   end
 
   # Do reverse geocode search to find information about given coordinates.
@@ -96,7 +96,7 @@ module Geocoding
   def reverse_geocode(coords, opts={})
     clean = select_keys(opts, REVERSE_GEOCODE_KEYS)
     query = {'request' => 'reverse_geocode', 'coordinate' => coords}.merge(clean)
-    @connection.perform_query(query)
+    @client.perform_query(query)
   end
 
   GEOCODE_KEYS = ['key', 'cities', 'loc_types', 'disable_error_correction',

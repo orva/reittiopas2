@@ -1,4 +1,4 @@
-require 'reittiopas2/connection'
+require 'reittiopas2/client'
 require 'reittiopas2/geocoding'
 require 'reittiopas2/routing'
 require 'reittiopas2/utilities'
@@ -9,7 +9,7 @@ class Reittiopas2
   include Routing 
 
   def initialize(username, password)
-    @connection = Reittiopas2::Connection.new(username, password)
+    @client = Reittiopas2::Client.new(username, password)
   end
 end
 
