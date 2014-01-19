@@ -1,13 +1,14 @@
 class Reittiopas2
 
-module Util
+module Utilities
+  module_function
 
   # Converts array values into string values containing array members joined
   # by pipe ('|') characters.
   #
   # @param [Hash] a hash
   # @return [Hash] a hash
-  def self.convert_array_values(hash)
+  def convert_array_values(hash)
     result = hash.map do |key, value|
       if value.is_a? Array
         [key, value.join('|')]
@@ -19,7 +20,7 @@ module Util
     Hash[result]
   end
 
-  def self.select_keys(hash, keys)
+  def select_keys(hash, keys)
     hash.select do |key, value|
       keys.include? key
     end
