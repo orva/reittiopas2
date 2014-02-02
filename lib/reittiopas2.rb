@@ -11,5 +11,9 @@ class Reittiopas2
   def initialize(username, password)
     @client = Reittiopas2::Client.new(username, password)
   end
+
+  def self.base_url
+    Reittiopas2::Client::BASE_URL
+  end
 end
 

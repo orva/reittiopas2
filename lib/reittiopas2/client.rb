@@ -14,8 +14,9 @@ class Reittiopas2
   class Client
     include Utilities
 
+    BASE_URL = "http://api.reittiopas.fi/hsl/prod/"
+
     def initialize(username, password)
-      @base_url = "http://api.reittiopas.fi/hsl/prod/"
       @base_query = {"user" => username, "pass" => password}
     end
 
@@ -35,7 +36,7 @@ class Reittiopas2
     #   key 'error' containing error message.
     def perform_query(query={})
       query = convert_array_values(query)
-      uri = Addressable::URI.parse(@base_url)
+      uri = Addressable::URI.parse(BASE_URL)
       uri.query_values = @base_query.merge(query)
 
       res = Net::HTTP.get_response(uri)

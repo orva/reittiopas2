@@ -10,6 +10,12 @@ describe Reittiopas2::Client do
     @query = {"user" => @user, "pass" => @pwd}
   end
 
+  describe "base_url getter" do
+    it "should give url to api endpoint for easier stubbing" do
+      Reittiopas2::base_url.should == @base_url
+    end
+  end
+
   describe "query forming" do
     it "should put pipes into arrays" do
       q = @query.merge({ "array" => ["one", "two", "three"] })
