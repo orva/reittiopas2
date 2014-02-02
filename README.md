@@ -9,7 +9,7 @@ Reittiopas 2 is a simple Ruby library for accessing the [Reittiopas API][API].
 
 Install using [Bundler][]:
 
-    gem 'reittiopas2', '~> 0.0.4'
+    gem 'reittiopas2', '~> 0.0.5'
 
   [Bundler]: http://bundler.io/
 
